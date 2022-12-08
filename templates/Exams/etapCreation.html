@@ -1,0 +1,139 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="{% static 'image/logoblack.png' %}" type="image/png">
+<title>QCM</title>
+
+<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+
+</head>
+<body id="bg" style="background-image: url('{% static 'image/16.jpg' %}');
+                        background-repeat: no-repeat;
+                        background-attachment: fixed ;
+                        background-position: center;
+                        background-size: 1550px 800px">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" id="home" href="{% url 'home' %}">Accueil</a>
+          <a class="nav-item nav-link" id="logout" href="{% url 'home' %}">Se Déconnecter</a>
+
+          <a class="nav-item nav-link" id="login" href="{% url 'login' %}">Connexion</a>
+          <a class="nav-item nav-link" id="signUp" href="{% url 'signup' %}">S'inscrire</a>
+        </div>
+      </div>
+    </nav>
+
+    <!img src="exam-1.jpg" width="1500" height="300"!>
+
+    <h3 class="text-center">Creation de QCM </h3>
+	<form action="" method="post" class="row" style="width: 900px; margin: auto" enctype="multipart/form-data">
+         {% csrf_token %}
+		<div class="col-6" >
+		 <label for="titre" class="form-label"><strong>Titre</strong></label>
+		 <input type="text" class="form-control" id="titre" name="titre" required="required">
+		</div>
+
+		<div class="col-6">
+		 <label for="session" class="form-label"><strong>Session</strong></label>
+		 <select id="session" name="session" class="form-control"  >
+			 <option value="SN" selected>SN</option>
+			 <option value="SR">SR</option>
+		 </select>
+		</div>
+
+	<br><br>
+		<div class="col-6" >
+		 <label for="NBQ" class="form-label"><strong>Nombre de Question</strong></label>
+		 <input type="number" class="form-control" id="NBQ" name="NBQ"  min="10" max="40" value="20"></input>
+		</div>
+	<br><br>
+		<div class="col-6" >
+		 <label for="NBCh" class="form-label"><strong>Nombre de Choix</strong></label>
+		 <input type="number" class="form-control" id="NBCh" name="NBCh" max="6" min="3" value="3" ></input>
+		</div>
+	<br><br>
+		<div class="col-6" >
+		 <label for="nbv" class="form-label"><strong>Nombre de Variante</strong></label>
+		 <input type="number" class="form-control" id="NbV" name="NbV" min="1" max="1" value="1"></input>
+		</div>
+	<br><br>
+		<div class="col-6" >
+		 <label for="NR" class="form-label"><strong>Nombre Max de bonnes réponses</strong></label>
+		 <input  type="number" class="form-control" id="NR" name="NR" min="1" max="1" value="1"></input>
+		</div>
+	<br><br>
+		<div class="col-6" >
+		 <label for="notetotal" class="form-label"><strong>Note total</strong></label>
+		 <input type="number" class="form-control" id="notetotal" name="Nt" min="10" max="100" value="20"></input>
+		</div>
+	<br><br>
+		<div class="col-6" >
+		 <label for="anneeU" class="form-label" ><strong>A.U</strong></label>
+		 <input type="text" class="form-control" id="anneeU" name="anneeU" value="2020-2021" ></input>
+		</div>
+	<br><br>
+        <div class="col-6" >
+            <label for="session" class="form-label"><strong>Filière</strong></label>
+		 <select id="filiere" name="filiere" class="form-control"  >
+			 <option value="SMP">SMP</option>
+			 <option value="SMC" selected>SMC</option>
+			 <option value="SV">SV</option>
+			 <option value="STU">STU</option>
+			 <option value="SMA">SMA</option>
+			 <option value="SMI">SMI</option>
+		 </select>
+            <div><br><br></div>
+  		</div>
+		<div class="col-6" >
+		 <label for="matiere"  class="form-label"><strong>Matiere</strong></label>
+		 <select id="matiere" name="matiere" class="form-control"  >
+			 <option value="Technologie De Web">Technologie De Web</option>
+			 <option value="Programmation" selected>Programmation</option>
+			 <option value="Analyse">Analyse</option>
+			 <option value="Algebre">Algebre</option>
+			 <option value="Electronique">Electronique</option>
+			 <option value="Architecture Des Ordinateurs">Architecture Des Ordinateurs</option>
+			 <option value="Systeme D'exploitation">Systeme D'exploitation</option>
+             <option value="Base De Donnee">Base De Donnee</option>
+             <option value="Reseaux">Reseaux</option>
+             <option value="COO">COO</option>
+             <option value="Algorithmique">Algorithmique</option>
+             <option value="Compilation">Compilation</option>
+             <option value="POO">POO</option>
+		 </select>
+		</div>
+		<div class="col-9" >
+            <div><label for="File2"><strong>Fichier des Etudiants</strong></label></div>
+            <div><input type="file"  id="File2" name="f2"></div>
+  		</div>
+
+        <div class="col-auto"><button type="submit" class="btn btn-dark" >Creer le QCM</button></div>
+
+	</form>
+<div>
+      {% for message in messages %}
+      <h4 align="center" style="color: red">{{ message }}</h4>
+      {% endfor %}
+</div>
+</body>
+</html>
+
+{% endblock %}

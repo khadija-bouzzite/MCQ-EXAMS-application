@@ -1,0 +1,82 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="{% static 'image/logoblack.png' %}" type="image/png">
+  <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <title>Liste</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" id="home" href="{% url 'home' %}">Accueil</a>
+          <a class="nav-item nav-link" id="logout" href="{% url 'home' %}">Se Déconnecter</a>
+
+          <a class="nav-item nav-link" id="login" href="{% url 'login' %}">Connexion</a>
+          <a class="nav-item nav-link" id="signUp" href="{% url 'signup' %}">S'inscrire</a>
+          <a class="nav-item nav-link" href="{% url 'create' %}">Creer Un Nouvel Examen</a>
+        </div>
+      </div>
+    </nav>
+  <br>
+  <br>
+  <h2 align="center"> La liste des Examen </h2>
+
+<table class="table table-light table-striped table-bordered">
+  <thead class="table-dark">
+    <tr >
+
+      <th scope="col"> </th>
+      <th scope="col">titre</th>
+      <th scope="col">date de creation</th>
+      <th scope="col">Telecharger</th>
+      <th scope="col">Entrer les reponses</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in exams %}
+    <tr>
+
+      <td >{{ i.id }}</td>
+      <td >{{ i.titre }}</td>
+      <td >{{ i.DateCreation }}</td>
+      <td>
+          <form action="",method="post">
+              {% csrf_token %}
+               <a id="qcm" href="{{ i.PdfQcm.url }}"> Telecharger </a>
+          </form>
+      </td>
+        <td>
+          <form action="",method="post">
+              {% csrf_token %}
+              <a id="qcm" href="reponse/{{ i.id }}"> reponses </a>
+          </form>
+      </td>
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+</body>
+</html>
+
+{% endblock %}

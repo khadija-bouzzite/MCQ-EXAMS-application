@@ -1,0 +1,109 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="{% static 'image/logoblack.png' %}" type="image/png">
+  <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <title>reponsePage</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" id="home" href="{% url 'home' %}">Accueil</a>
+          <a class="nav-item nav-link" id="logout" href="{% url 'home' %}">Se Déconnecter</a>
+
+          <a class="nav-item nav-link" id="login" href="{% url 'login' %}">Connexion</a>
+          <a class="nav-item nav-link" id="signUp" href="{% url 'signup' %}">S'inscrire</a>
+          <a class="nav-item nav-link" href="{% url 'exam' %}">Retourne a la liste</a>
+        </div>
+      </div>
+    </nav>
+
+<div align="center">
+<form method="post">
+{% csrf_token %}
+{% for i in exam %}
+    <table class="table table-light table-striped table-bordered">
+  <tbody class="table-dark">
+    <tr >
+      <td scope="col">{{  i.id }} </td>
+      <td scope="col">{{  i.titre }}</td>
+      <td scope="col">{{  i.matiere }}</td>
+      <td scope="col">{{  i.nbrQst }} Questions</td>
+      <td scope="col">{{  i.nbrChoix }} Choix</td>
+      <td scope="col"><a id="qcm" href="correction/{{ i.id }}"> corriger </a></td>
+    </tr>
+  </tbody>
+    </table>
+     <br>
+    {% for j in str %}
+        {% if j <= 8 %}
+        Q0{{ j |add:"1" }}   :
+        {% endif %}
+        {% if j > 8 %}
+        Q{{ j |add:"1" }}   :
+        {% endif %}
+    <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions{{ j }}" id="inlineRadio1" value="A" checked>
+          <label class="form-check-label" for="inlineRadio1">A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions{{ j }}" id="inlineRadio2" value="B">
+          <label class="form-check-label" for="inlineRadio2">B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions{{ j }}" id="inlineRadio3" value="C">
+          <label class="form-check-label" for="inlineRadio3">C</label>
+        </div>
+        {% if i.nbrChoix >= 4 %}
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions{{ j }}" id="inlineRadio3" value="D">
+              <label class="form-check-label" for="inlineRadio3">D</label>
+            </div>
+                {% if i.nbrChoix >= 5 %}
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions{{ j }}" id="inlineRadio3" value="E">
+                  <label class="form-check-label" for="inlineRadio3">E</label>
+                </div>
+                {% if i.nbrChoix == 6 %}
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions{{ j }}" id="inlineRadio3" value="F">
+                  <label class="form-check-label" for="inlineRadio3">F</label>
+                </div>
+                    {% endif %}
+            {% endif %}
+        {% endif %}
+        <br>
+    {% endfor %}
+
+
+{% endfor %}
+        <div align="center">
+            <button type="submit" class="btn btn-dark me-md-2" >confirmer</button>
+		 </div>
+
+</form>
+</div>
+
+</body>
+</html>
+
+
+{% endblock %}

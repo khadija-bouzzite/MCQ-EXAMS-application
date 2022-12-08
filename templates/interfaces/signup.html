@@ -1,0 +1,91 @@
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>signup</title>
+  <link rel="icon" href="{% static 'image/logoblack.png' %}" type="image/png">
+<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+
+  </head>
+  <body id="bg" style="background-image: url('{% static 'image/16.jpg' %}');
+                        background-repeat: no-repeat;
+                        background-attachment: fixed ;
+                        background-position: center;
+                        background-size: 1550px 800px">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" id="home" href="{% url 'home' %}">Accueil</a>
+          <a class="nav-item nav-link" id="logout" href="{% url 'home' %}">Se Déconnecter</a>
+
+          <a class="nav-item nav-link" id="login" href="{% url 'login' %}">Connexion</a>
+          <a class="nav-item nav-link" id="signUp" href="{% url 'signup' %}">S'inscrire</a>
+        </div>
+      </div>
+    </nav>
+    <form action=""   method="POST" style="width: 500px; margin: auto">
+        {% csrf_token %}
+      <h3 align="center">S'inscrire</h3>
+
+      <div class="form-group">
+        <label for="email">Nom </label>
+        <input type="text" class="form-control" id="nom" name="nom" placeholder="Enter nom"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="prenom">Prenom</label>
+        <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Entrer prenom" required="required">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email </label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"
+        />
+      </div>
+      <div class="form-group">
+        <label for="mdp1">Mot de passe</label>
+        <input type="password" class="form-control" id="mdp1" name="mdp1" placeholder="Entrer mot de passe" required="required">
+      </div>
+
+      <div class="form-group">
+        <label for="mdp2">Mot de passe (Confirm)</label>
+        <input type="password" class="form-control" id="mdp2" name="mdp2" placeholder="Confirmer mot de passe" required="required">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Département </label>
+        <input type="text" class="form-control" id="dept" name="dept"
+        />
+      </div>
+
+      <br>
+      <button type="submit" class="btn btn-dark">S'inscrire</button>
+</form>
+  <div>
+      {% for message in messages %}
+      <h4 align="center">{{ message }}</h4>
+      {% endfor %}
+  </div>
+
+  </body>
+</html>
+{% endblock %}
